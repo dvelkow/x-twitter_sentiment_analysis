@@ -9,9 +9,8 @@ A financial sentiment analysis dashboard for X/Twitter, mainly aiming to gauge g
 ### Table of Contents
 - [Overview](#Overview)
 - [IMPORTANT](#Important)
-- [Setup Instructions](#setup-instructions)
 - [How to Use](#how-to-use)
-- [Approach](#approach)
+- [Setup Instructions](#approach)
 
 ### Overview
 This project leverages natural language processing techniques to gauge market sentiment.The project is structured into different levels, each focusing on specific tasks, making it easier to understand, maintain, and extend. It fetches real-time tweets using the Twitter API for live sentiment analysis
