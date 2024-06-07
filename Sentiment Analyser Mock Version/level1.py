@@ -10,21 +10,20 @@ def analyze_sentiment(text):
 
     for chunk in chunks:
         sentiment_score = calculate_sentiment(chunk)
-        if sentiment_score > 0:
-            sentiment = 1  # Positive sentiment
-        elif sentiment_score < 0:
-            sentiment = -1  # Negative sentiment
-        else:
-            sentiment = 0  # Neutral sentiment
-        
         overall_sentiment_score += sentiment_score
 
-    # Calculate the final overall sentiment score (1, 0, or -1)
-    if overall_sentiment_score > 0:
-        final_sentiment = 1
-    elif overall_sentiment_score < 0:
-        final_sentiment = -1
+    # Calculate the final overall sentiment score
+    if chunk_count > 0:
+        average_sentiment_score = overall_sentiment_score / chunk_count
     else:
-        final_sentiment = 0
+        average_sentiment_score = 0.5  # Neutral if no chunks found
+
+    # Determine sentiment based on average sentiment score
+    if average_sentiment_score > 0.55:
+        final_sentiment = 1  # Positive
+    elif average_sentiment_score < 0.45:
+        final_sentiment = -1  # Negative
+    else:
+        final_sentiment = 0  # Neutral
 
     return final_sentiment

@@ -1,30 +1,30 @@
-# level 1, tweets from level 2 to asses whether the tweet is positive or negative
+
+# level 1, breaks sentances up and sends them to be analysed to lvl 0
 from level0 import calculate_sentiment
 
 def analyze_sentiment(text):
     # Split text based on periods and commas
-    chunks = [chunk.strip() for chunk in text.replace('.', ',').split(',') if chunk.strip()]
+    chunks = [chunk.strip().lower() for chunk in text.replace('.', ',').split(',') if chunk.strip()]
 
     overall_sentiment_score = 0
     chunk_count = len(chunks)
 
     for chunk in chunks:
         sentiment_score = calculate_sentiment(chunk)
-        if sentiment_score > 0:
-            sentiment = 1  # Positive sentiment
-        elif sentiment_score < 0:
-            sentiment = -1  # Negative sentiment
-        else:
-            sentiment = 0  # Neutral sentiment
-        
         overall_sentiment_score += sentiment_score
 
-    # Calculate the final overall sentiment score (1, 0, or -1)
-    if overall_sentiment_score > 0:
-        final_sentiment = 1
-    elif overall_sentiment_score < 0:
-        final_sentiment = -1
+    # Calculate the final overall sentiment score
+    if chunk_count > 0:
+        average_sentiment_score = overall_sentiment_score / chunk_count
     else:
-        final_sentiment = 0
+        average_sentiment_score = 0.5  # Neutral if no chunks found
+
+    # Determine sentiment based on average sentiment score
+    if average_sentiment_score > 0.55:
+        final_sentiment = 1  # Positive
+    elif average_sentiment_score < 0.45:
+        final_sentiment = -1  # Negative
+    else:
+        final_sentiment = 0  # Neutral
 
     return final_sentiment

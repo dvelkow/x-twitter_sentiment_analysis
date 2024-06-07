@@ -1,22 +1,21 @@
-# level2, collects tweets and sends them to lvl 1 to be analysed
-
+# level 2/main, collects tweets and sends them to lvl 1 to be analysed
+import tweepy
 from level1 import analyze_sentiment
 
-# Example tweets for demonstration, this is with the person of someone testing the model, if he doesn't have access to twitter API, you can feel free to copy paste tweets from your timeline in the place of these example tweets 
-example_tweets = [
-    "Bitcoin is looking good on the 4H, feeling bullish $BTC",
-    "The crash of $BTC is causing a lot of fear and panic selling.",
-    "My model is predict a significant increase in $BTC in the short term.",
-    "This dip is not looking good, more blood to come $BTC",
-    "The new regulations might impact Bitcoin prices negatively. $BTC",
-    "I am very bullish on Bitcoin rn, thinking about longing $BTC",
-    "The FOMO is soon going to manifest itself and drive more people to buy $ETH",
-    "A big on-chain hack is happening rn, will likely affect the price, so bearish short term $BTC $ETH",
-    "Bitcoin's showing some signs of life, looking solid so far. $BTC",
-    "People are still cautious despite the uptrend in $BTC, which means more future buy pressure $BTC"
-]
+#Fill it up with your API info
+consumer_key = 'PLACEHOLDER'
+consumer_secret = 'PLACEHOLDER'
+access_token = 'PLACEHOLDER'
+access_token_secret = 'PLACEHOLDER'
 
-def analyze_tweets(tweets):
+
+def fetch_tweets(query, count=100):
+    tweets = tweepy.Paginator(client.search_recent_tweets, query=query, tweet_fields=['context_annotations', 'created_at'], max_results=10).flatten(limit=count)
+    tweet_list = [tweet.text for tweet in tweets]
+    return tweet_list
+
+def analyze_tweets(query, count=100):
+    tweets = fetch_tweets(query, count)
     total_score = 0
     analyzed_tweets = 0
 
@@ -48,5 +47,6 @@ def analyze_tweets(tweets):
     print(f"Overall Sentiment Score: {overall_score:.2f}")
     print(f"{message}")
 
-
-analyze_tweets(example_tweets)
+if __name__ == "__main__":
+    query = "$BTC"  # Example query
+    analyze_tweets(query, count=100)
