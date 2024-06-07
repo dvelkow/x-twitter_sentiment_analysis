@@ -2,10 +2,9 @@
 A financial sentiment analysis dashboard for X/Twitter, mainly aiming to gauge greed/fear level based on tweets for a given ticker.
 
 ### It is constructed of 3 levels 
-- **Level 2:** Recieves Tweets from Twitter API, with the selected ticker and sends them to *Level 1* for further analysis.
-- **Level 1:** Splits the tweet to different parts, then it sends every word from the part to *Level 0* for further analysis, after it recieves it's classification it averages out the score for the given part 
-- **Level 0:** Analyses every single word from a tweet and classifies it as either positive or negative.
-
+- **Level 2/ Main:** Recieves Tweets from Twitter API, with the selected ticker and sends them to *Level 1* for further analysis.
+- **Level 1:** Splits the tweet to different parts, then it sends every word from the part to *Level 0* for further analysis, after it recieves every word's sentiment probability it averages out the score for the given part 
+- **Level 0:** Analyses every single word from a tweet and asseses the probability it's negative or positive, and sends the probability value to lvl 1
 ### Table of Contents
 - [Overview](#Overview)
 - [IMPORTANT](#Important)
